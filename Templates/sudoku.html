@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    .sudoku-container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .sudoku-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+        background: #333;
+        padding: 2px;
+        border-radius: 10px;
+        margin: 30px 0;
+    }
+    .sudoku-cell {
+        background: white;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sudoku-cell input {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        border: none;
+        background: transparent;
+    }
+    .sudoku-cell.prefilled {
+        background: #e9ecef;
+    }
+    .sudoku-cell.prefilled input {
+        color: #667eea;
+        font-weight: bold;
+    }
+    .timer {
+        font-size: 2em;
+        font-weight: bold;
+        color: #667eea;
+        text-align: center;
+        margin: 20px 0;
+    }
+    .attempts {
+        text-align: center;
+        font-size: 1.3em;
+        color: #dc3545;
+        margin: 15px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="sudoku-container">
+    <h2 style="text-align: center; color: #333; margin-bottom: 20px;">🧩 Challenge Sudoku 4x4</h2>
+    
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    
+    <div class="alert alert-warning">
+        ⚠️ <strong>Règles:</strong> Chaque ligne, colonne et carré 2x2 doit contenir les chiffres 1, 2, 3 et 4
+    </div>
+    
+    <div class="timer" id="timer">⏱️ 0:00</div>
+    <div class="attempts">🎯 Tentatives restantes: {{ attempts }}</div>
+    
+    <form method="POST" action="{{ url_for('sudoku_challenge') }}">
+        <div class="sudoku-grid">
+            {% for i in range(4) %}
+                {% for j in range(4) %}
+                    <div class="sudoku-cell {% if puzzle[i][j] != 0 %}prefilled{% endif %}">
+                        {% if puzzle[i][j] != 0 %}
+                            <input type="text" name="cell_{{ i }}_{{ j }}" value="{{ puzzle[i][j] }}" readonly>
+                        {% else %}
+                            <input type="number" name="cell_{{ i }}_{{ j }}" min="1" max="4" value="">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        
+        <div style="display: flex; gap: 15px; justify-content: center;">
+            <button type="submit" class="btn">✅ Valider la solution</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">❌ Abandonner</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let seconds = 0;
+setInterval(() => {
+    seconds++;
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    document.getElementById('timer').textContent = `⏱️ ${mins}:${secs.toString().padStart(2, '0')}`;
+}, 1000);
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+<!-- templates/challenge_success.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px 0;">
+    <div style="font-size: 5em; margin-bottom: 20px;">🎉</div>
+    <h2 style="color: #28a745; margin-bottom: 20px;">Challenge réussi !</h2>
+    <p style="font-size: 1.2em; color: #666; margin-bottom: 30px;">
+        Sudoku résolu en <strong>{{ elapsed }}s</strong>
+    </p>
+    
+    <div class="alert alert-success">
+        Votre demande <strong>#{{ ticket_id }}</strong> a été placée en file prioritaire
+    </div>
+    
+    <div style="margin-top: 40px;">
+        <a href="{{ url_for('queue') }}" class="btn">📋 Voir la file d'attente</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">🏠 Retour à l'accueil</a>
+    </div>
+</div>
+{% endblock %}

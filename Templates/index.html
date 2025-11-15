@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px 0;">
+    <h2 style="color: #333; margin-bottom: 20px;">Bienvenue sur le système de ticketing BI</h2>
+    <p style="font-size: 1.2em; color: #666; margin-bottom: 40px;">
+        Système de priorisation intelligente avec Proof-of-Work
+    </p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px;">
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 15px; border: 3px solid #667eea;">
+            <h3 style="color: #667eea; margin-bottom: 15px;">📋 Standard</h3>
+            <p style="color: #666;">SLA: 5 jours ouvrés</p>
+            <p style="color: #666;">Traitement FIFO</p>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 15px; border: 3px solid #dc3545;">
+            <h3 style="color: #dc3545; margin-bottom: 15px;">🔥 Urgent</h3>
+            <p style="color: #666;">Challenge requis</p>
+            <p style="color: #666;">Traitement prioritaire</p>
+        </div>
+    </div>
+    
+    <div style="margin-top: 60px;">
+        <a href="{{ url_for('new_ticket') }}" class="btn" style="font-size: 1.2em; padding: 15px 40px;">
+            ➕ Créer une nouvelle demande
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!-- templates/challenge_failed.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px 0;">
+    <div style="font-size: 5em; margin-bottom: 20px;">😞</div>
+    <h2 style="color: #dc3545; margin-bottom: 20px;">Challenge non validé</h2>
+    <p style="font-size: 1.2em; color: #666; margin-bottom: 30px;">
+        Vous avez épuisé vos 3 tentatives
+    </p>
+    
+    <div class="alert alert-warning">
+        Votre demande <strong>#{{ ticket_id }}</strong> a été placée en file standard (FIFO)
+    </div>
+    
+    <p style="color: #666; margin: 20px 0;">
+        Elle sera traitée selon l'ordre d'arrivée avec un SLA de 5 jours ouvrés.
+    </p>
+    
+    <div style="margin-top: 40px;">
+        <a href="{{ url_for('queue') }}" class="btn">📋 Voir la file d'attente</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">🏠 Retour à l'accueil</a>
+    </div>
+</div>
+{% endblock %}

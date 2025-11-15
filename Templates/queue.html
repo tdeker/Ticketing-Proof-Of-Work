@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 style="color: #333; margin-bottom: 30px;">📋 File d'attente des tickets</h2>
+
+{% if urgent_tickets %}
+<div style="margin-bottom: 40px;">
+    <h3 style="color: #dc3545; margin-bottom: 20px;">🔥 File Urgente</h3>
+    {% for ticket in urgent_tickets %}
+    <div style="background: #fff3cd; border-left: 5px solid #dc3545; padding: 20px; margin-bottom: 15px; border-radius: 8px;">
+        <h4 style="color: #333; margin-bottom: 10px;">Ticket #{{ ticket.id }} - {{ ticket.title }}</h4>
+        <p style="color: #666; margin: 5px 0;"><strong>Description:</strong> {{ ticket.description }}</p>
+        <p style="color: #666; margin: 5px 0;"><strong>Impact:</strong> {{ ticket.impact }}</p>
+        <p style="color: #666; margin: 5px 0;"><strong>Créé le:</strong> {{ ticket.timestamp[:19] }}</p>
+        <p style="color: #666; margin: 5px 0;"><strong>Statut:</strong> <span style="color: #dc3545;">{{ ticket.status }}</span></p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if standard_tickets %}
+<div>
+    <h3 style="color: #6c757d; margin-bottom: 20px;">📋 File Standard (FIFO)</h3>
+    {% for ticket in standard_tickets %}
+    <div style="background: #f8f9fa; border-left: 5px solid #6c757d; padding: 20px; margin-bottom: 15px; border-radius: 8px;">
+        <h4 style="color: #333; margin-bottom: 10px;">Ticket #{{ ticket.id }} - {{ ticket.title }}</h4>
+        <p style="color: #666; margin: 5px 0;"><strong>Description:</strong> {{ ticket.description }}</p>
+        <p style="color: #666; margin: 5px 0;"><strong>Impact:</strong> {{ ticket.impact }}</p>
+        <p style="color: #666; margin: 5px 0;"><strong>Créé le:</strong> {{ ticket.timestamp[:19] }}</p>
+        <p style="color: #666; margin: 5px 0;"><strong>Statut:</strong> {{ ticket.status }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if not urgent_tickets and not standard_tickets %}
+<div style="text-align: center; padding: 60px 0; color: #999;">
+    <div style="font-size: 4em; margin-bottom: 20px;">📭</div>
+    <p style="font-size: 1.3em;">Aucun ticket dans la file</p>
+</div>
+{% endif %}
+
+<div style="margin-top: 40px;">
+    <a href="{{ url_for('new_ticket') }}" class="btn">➕ Créer un nouveau ticket</a>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">🏠 Retour à l'accueil</a>
+</div>
+{% endblock %}

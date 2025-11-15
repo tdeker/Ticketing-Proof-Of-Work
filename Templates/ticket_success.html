@@ -1,0 +1,29 @@
+<!-- templates/ticket_success.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px 0;">
+    <div style="font-size: 5em; margin-bottom: 20px;">✅</div>
+    <h2 style="color: #28a745; margin-bottom: 20px;">Demande créée avec succès</h2>
+    
+    <div style="background: #f8f9fa; padding: 30px; border-radius: 15px; max-width: 600px; margin: 30px auto; text-align: left;">
+        <h3 style="color: #667eea; margin-bottom: 20px;">Ticket #{{ ticket.id }}</h3>
+        <p><strong>Titre:</strong> {{ ticket.title }}</p>
+        <p><strong>Description:</strong> {{ ticket.description }}</p>
+        <p><strong>Impact:</strong> {{ ticket.impact }}</p>
+        <p><strong>Priorité:</strong> 
+            {% if ticket.priority == 'urgent' and ticket.status == 'urgent_validated' %}
+                <span style="color: #dc3545;">🔥 Urgent (Validé)</span>
+            {% else %}
+                <span style="color: #6c757d;">📋 Standard</span>
+            {% endif %}
+        </p>
+        <p><strong>Statut:</strong> {{ ticket.status }}</p>
+    </div>
+    
+    <div style="margin-top: 40px;">
+        <a href="{{ url_for('queue') }}" class="btn">📋 Voir la file d'attente</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">🏠 Retour à l'accueil</a>
+    </div>
+</div>
+{% endblock %}

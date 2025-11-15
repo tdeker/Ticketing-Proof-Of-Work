@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 style="color: #333; margin-bottom: 30px;">📊 Statistiques du système</h2>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px;">
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; text-align: center;">
+        <div style="font-size: 3em; margin-bottom: 10px;">{{ stats.total }}</div>
+        <div style="font-size: 1.1em;">Total de tickets</div>
+    </div>
+    
+    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 30px; border-radius: 15px; text-align: center;">
+        <div style="font-size: 3em; margin-bottom: 10px;">{{ stats.urgent_validated }}</div>
+        <div style="font-size: 1.1em;">Urgents validés</div>
+    </div>
+    
+    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 30px; border-radius: 15px; text-align: center;">
+        <div style="font-size: 3em; margin-bottom: 10px;">{{ stats.downgraded }}</div>
+        <div style="font-size: 1.1em;">Dégradés</div>
+    </div>
+    
+    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; padding: 30px; border-radius: 15px; text-align: center;">
+        <div style="font-size: 3em; margin-bottom: 10px;">{{ stats.standard }}</div>
+        <div style="font-size: 1.1em;">Standard directs</div>
+    </div>
+</div>
+
+<div style="background: #f8f9fa; padding: 30px; border-radius: 15px; margin-bottom: 20px;">
+    <h3 style="color: #333; margin-bottom: 20px;">📈 Taux et ratios</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+            <p style="color: #666; margin-bottom: 10px;"><strong>Taux d'urgence validée:</strong></p>
+            <div style="background: white; padding: 15px; border-radius: 8px; font-size: 1.5em; color: #667eea; font-weight: bold;">
+                {{ stats.urgent_rate }}%
+            </div>
+        </div>
+        <div>
+            <p style="color: #666; margin-bottom: 10px;"><strong>Taux de réussite challenge:</strong></p>
+            <div style="background: white; padding: 15px; border-radius: 8px; font-size: 1.5em; color: #28a745; font-weight: bold;">
+                {{ stats.success_rate }}%
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-warning">
+    <strong>💡 Conseil:</strong> Un taux d'urgence validée supérieur à 25% peut indiquer que le système est surchargé. 
+    Envisagez d'ajuster la difficulté du challenge ou d'augmenter les ressources.
+</div>
+
+<div style="margin-top: 40px;">
+    <a href="{{ url_for('index') }}" class="btn">🏠 Retour à l'accueil</a>
+</div>
+{% endblock %}

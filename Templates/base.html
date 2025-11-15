@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Système BI Ticketing{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎫 Système BI Ticketing</h1>
+        </div>
+        
+        <div class="nav">
+            <a href="{{ url_for('index') }}">🏠 Accueil</a>
+            <a href="{{ url_for('new_ticket') }}">➕ Nouvelle demande</a>
+            <a href="{{ url_for('queue') }}">📋 File d'attente</a>
+            <a href="{{ url_for('stats') }}">📊 Statistiques</a>
+        </div>
+        
+        {% block content %}{% endblock %}
+    </div>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

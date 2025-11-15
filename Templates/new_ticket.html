@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 style="color: #333; margin-bottom: 30px;">📝 Nouvelle demande BI</h2>
+
+<form method="POST" action="{{ url_for('new_ticket') }}">
+    <div class="form-group">
+        <label for="title">Titre de la demande *</label>
+        <input type="text" id="title" name="title" required placeholder="Ex: Dashboard des ventes Q4">
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Description *</label>
+        <textarea id="description" name="description" rows="5" required placeholder="Décrivez votre besoin en détail..."></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="impact">Impact métier *</label>
+        <textarea id="impact" name="impact" rows="3" required placeholder="Quel est l'impact si cette demande n'est pas traitée ?"></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="priority">Niveau de priorité *</label>
+        <select id="priority" name="priority" required>
+            <option value="standard">📋 Standard (SLA: 5 jours)</option>
+            <option value="urgent">🔥 Urgent (nécessite validation par challenge)</option>
+        </select>
+    </div>
+    
+    <div style="display: flex; gap: 15px; margin-top: 30px;">
+        <button type="submit" class="btn">Soumettre</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Annuler</a>
+    </div>
+</form>
+{% endblock %}
